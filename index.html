@@ -734,6 +734,7 @@ footer p{font-family:'DM Mono',monospace;font-size:13px;color:var(--muted);}
     <div class="sl" style="margin-bottom:10px;">Live Stats</div>
     <div class="stats-grid reveal-children">
 
+
       <!-- LeetCode Heatmap Card -->
       <div class="stat-card">
         <div class="stat-card-header">
@@ -765,7 +766,7 @@ footer p{font-family:'DM Mono',monospace;font-size:13px;color:var(--muted);}
           </div>
         </div>
         <div class="stat-visit-row">
-          <span class="stat-contrib-note">Past 12 months · jatin_233</span>
+          <span class="stat-contrib-note">Past 6 months · jatin_233</span>
           <a href="https://leetcode.com/u/jatin_233/" target="_blank" class="stat-visit-link">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="11" height="11"><circle cx="12" cy="12" r="10"/><polyline points="12 8 16 12 12 16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
             Visit LeetCode
@@ -1042,9 +1043,9 @@ for(let i=0;i<90;i++)parts.push(new P());
     // Nov, Dec, early Jan: empty
     function genData() {
       const rand = seededRand(0xC0FFEE42);
-      const startDate = new Date(2025, 10, 1); // Nov 1 2025
+      const startDate = new Date(2025, 8, 23); // Sep 23 2025 (6 months back)
       const endDate   = new Date(2026,  2, 23); // Mar 23 2026
-      const totalDays = Math.round((endDate - startDate) / 86400000) + 1; // 143
+      const totalDays = Math.round((endDate - startDate) / 86400000) + 1; // ~182
       const data = [];
 
       for (let i = 0; i < totalDays; i++) {
