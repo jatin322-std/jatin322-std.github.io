@@ -393,6 +393,105 @@ footer p{font-family:'DM Mono',monospace;font-size:13px;color:var(--muted);}
   letter-spacing: 0.05em;
 }
 
+
+/* ---- SCROLL ANIMATIONS ---- */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Stagger children inside a revealed parent */
+.reveal-children > * {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s cubic-bezier(0.4,0,0.2,1), transform 0.6s cubic-bezier(0.4,0,0.2,1);
+}
+.reveal-children.visible > *:nth-child(1) { transition-delay: 0.05s; opacity:1; transform:translateY(0); }
+.reveal-children.visible > *:nth-child(2) { transition-delay: 0.12s; opacity:1; transform:translateY(0); }
+.reveal-children.visible > *:nth-child(3) { transition-delay: 0.19s; opacity:1; transform:translateY(0); }
+.reveal-children.visible > *:nth-child(4) { transition-delay: 0.26s; opacity:1; transform:translateY(0); }
+.reveal-children.visible > *:nth-child(5) { transition-delay: 0.33s; opacity:1; transform:translateY(0); }
+.reveal-children.visible > *:nth-child(6) { transition-delay: 0.40s; opacity:1; transform:translateY(0); }
+.reveal-children.visible > *:nth-child(7) { transition-delay: 0.47s; opacity:1; transform:translateY(0); }
+.reveal-children.visible > *:nth-child(8) { transition-delay: 0.54s; opacity:1; transform:translateY(0); }
+
+/* Slide in from left */
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+/* Slide in from right */
+.reveal-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+/* Scale up */
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.65s cubic-bezier(0.4,0,0.2,1), transform 0.65s cubic-bezier(0.4,0,0.2,1);
+}
+.reveal-scale.visible { opacity: 1; transform: scale(1); }
+
+/* Hero animations on load */
+.hero-tag   { opacity:0; animation: heroFadeUp 0.7s 0.1s cubic-bezier(0.4,0,0.2,1) forwards; }
+.hero-h1    { opacity:0; animation: heroFadeUp 0.7s 0.25s cubic-bezier(0.4,0,0.2,1) forwards; }
+.hero-desc  { opacity:0; animation: heroFadeUp 0.7s 0.4s cubic-bezier(0.4,0,0.2,1) forwards; }
+.hero-act   { opacity:0; animation: heroFadeUp 0.7s 0.55s cubic-bezier(0.4,0,0.2,1) forwards; }
+.hero-stats { opacity:0; animation: heroFadeUp 0.7s 0.7s cubic-bezier(0.4,0,0.2,1) forwards; }
+.hero-photo { opacity:0; animation: heroFadeRight 0.9s 0.3s cubic-bezier(0.4,0,0.2,1) forwards; }
+
+@keyframes heroFadeUp {
+  from { opacity:0; transform: translateY(30px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+@keyframes heroFadeRight {
+  from { opacity:0; transform: translateX(40px); }
+  to   { opacity:1; transform: translateX(0); }
+}
+
+/* Number counter animation */
+.count-num { display: inline-block; }
+
+/* Section heading line wipe */
+.sl::after {
+  transform-origin: left;
+  animation: none;
+}
+.sl.visible::after {
+  animation: wipeRight 0.6s 0.3s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+@keyframes wipeRight {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* Hover lift for stat boxes */
+.gh-stat-box {
+  transition: transform 0.2s, border-color 0.2s, background 0.2s;
+}
+.gh-stat-box:hover {
+  transform: translateY(-3px);
+  border-color: rgba(232,96,28,0.35);
+}
+
+/* Smooth card hover glow */
+.scard, .pcard, .ccard, .acard, .profcard, .tcard {
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1),
+              border-color 0.3s,
+              box-shadow 0.3s;
+}
+
 /* FULL WIDTH SCALING */
 @media(min-width:1400px){
   :root{ --nav-h: 64px; }
@@ -484,14 +583,14 @@ footer p{font-family:'DM Mono',monospace;font-size:13px;color:var(--muted);}
 
 <section id="hero">
   <div>
-    <div class="htag">B.Tech CSE &middot; LPU, India</div>
-    <h1>Jatin<br><span class="aw">Grover</span></h1>
-    <p class="hdesc">Computer Science student building intelligent systems &mdash; from fine-tuned NLP models and RAG pipelines to end-to-end GenAI applications.</p>
-    <div class="hact">
+    <div class="htag hero-tag">B.Tech CSE &middot; LPU, India</div>
+    <h1 class="hero-h1">Jatin<br><span class="aw">Grover</span></h1>
+    <p class="hdesc hero-desc">Computer Science student building intelligent systems &mdash; from fine-tuned NLP models and RAG pipelines to end-to-end GenAI applications.</p>
+    <div class="hact hero-act">
       <a href="#projects" class="btn bp">View Projects &rarr;</a>
       <a href="#contact" class="btn bg-btn">Get in Touch</a>
     </div>
-    <div class="hst">
+    <div class="hst hero-stats">
       <div><div class="stn">8.33<span>*</span></div><div class="stl">CGPA</div></div>
       <div><div class="stn">200<span>+</span></div><div class="stl">DSA Problems</div></div>
       <div><div class="stn">7<span>+</span></div><div class="stl">Certificates</div></div>
@@ -499,7 +598,7 @@ footer p{font-family:'DM Mono',monospace;font-size:13px;color:var(--muted);}
     </div>
   </div>
   <div>
-    <div class="hphoto">
+    <div class="hphoto hero-photo">
       <div class="ph-init">JG</div>
       <div class="ph-hint">Photo coming soon</div>
     </div>
@@ -509,9 +608,9 @@ footer p{font-family:'DM Mono',monospace;font-size:13px;color:var(--muted);}
 
 <div class="sw" id="skills">
   <div class="sw-inner">
-    <div class="sl">Technical Skills</div>
-    <h2>What I Work With</h2>
-    <div class="sgrid">
+    <div class="sl reveal">Technical Skills</div>
+    <h2 class="reveal">What I Work With</h2>
+    <div class="sgrid reveal-children">
       <div class="scard"><div class="sci-line"></div><h3>Languages</h3><div class="tags"><span class="tag">Python</span><span class="tag">Java</span><span class="tag">C</span><span class="tag">C++</span></div></div>
       <div class="scard"><div class="sci-line"></div><h3>ML / AI Frameworks</h3><div class="tags"><span class="tag">Scikit-learn</span><span class="tag">XGBoost</span><span class="tag">HuggingFace</span><span class="tag">RoBERTa</span></div></div>
       <div class="scard"><div class="sci-line"></div><h3>Tools &amp; Platforms</h3><div class="tags"><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">FastAPI</span><span class="tag">Streamlit</span></div></div>
@@ -523,11 +622,11 @@ footer p{font-family:'DM Mono',monospace;font-size:13px;color:var(--muted);}
 
 <div class="sw" id="projects">
   <div class="sw-inner">
-    <div class="sl">Work</div>
-    <h2>Projects</h2>
+    <div class="sl reveal">Work</div>
+    <h2 class="reveal">Projects</h2>
     <div class="pgrid">
 
-      <div class="pcard">
+      <div class="pcard reveal">
         <div class="pcard-body">
           <div>
             <div class="pnum">01 / NLP</div>
@@ -544,7 +643,7 @@ footer p{font-family:'DM Mono',monospace;font-size:13px;color:var(--muted);}
         </div>
       </div>
 
-      <div class="pcard">
+      <div class="pcard reveal" style="transition-delay:0.1s">
         <div class="pcard-body">
           <div>
             <div class="pnum">02 / ML</div>
@@ -565,7 +664,7 @@ footer p{font-family:'DM Mono',monospace;font-size:13px;color:var(--muted);}
         </div>
       </div>
 
-      <div class="pcard">
+      <div class="pcard reveal" style="transition-delay:0.2s">
         <div class="pcard-body">
           <div>
             <div class="pnum">03 / DSA</div>
@@ -588,9 +687,9 @@ footer p{font-family:'DM Mono',monospace;font-size:13px;color:var(--muted);}
 
 <div class="sw" id="training">
   <div class="sw-inner">
-    <div class="sl">Experience</div>
-    <h2>Training</h2>
-    <div class="tcard">
+    <div class="sl reveal">Experience</div>
+    <h2 class="reveal">Training</h2>
+    <div class="tcard reveal-scale">
       <div class="tbadge">Algotutor &middot; Aug 2025</div>
       <h3>AI Powered NLP &mdash; Specialized Training</h3>
       <ul>
@@ -604,18 +703,18 @@ footer p{font-family:'DM Mono',monospace;font-size:13px;color:var(--muted);}
 
 <div class="sw" id="certificates">
   <div class="sw-inner">
-    <div class="sl">Credentials</div>
-    <h2>Certificates</h2>
-    <div class="cgrid" id="cert-grid"></div>
+    <div class="sl reveal">Credentials</div>
+    <h2 class="reveal">Certificates</h2>
+    <div class="cgrid reveal-children" id="cert-grid"></div>
     <p style="margin-top:11px;font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);">Coursera certs verify on coursera.org &middot; Infosys certs verify via QR at verify.onwingspan.com &middot; Click thumbnail to enlarge</p>
   </div>
 </div>
 
 <div class="sw" id="coding">
   <div class="sw-inner">
-    <div class="sl">Coding Profiles</div>
-    <h2>Find Me Online</h2>
-    <div class="profgrid">
+    <div class="sl reveal">Coding Profiles</div>
+    <h2 class="reveal">Find Me Online</h2>
+    <div class="profgrid reveal-children">
       <a href="https://leetcode.com/u/jatin_233/" target="_blank" class="profcard" style="border-color:rgba(255,161,22,0.2);">
         <div class="plogo plc-lc">LC</div>
         <div><div class="pplatform">LeetCode</div><div class="phandle">jatin_233</div><div class="pstat">134 on LC &middot; 200+ Total &middot; Rank #1,139,951</div></div>
@@ -633,7 +732,7 @@ footer p{font-family:'DM Mono',monospace;font-size:13px;color:var(--muted);}
   <!-- LIVE STATS -->
   <div style="margin-top:28px;">
     <div class="sl" style="margin-bottom:10px;">Live Stats</div>
-    <div class="stats-grid">
+    <div class="stats-grid reveal-children">
 
       <!-- LeetCode Heatmap Card -->
       <div class="stat-card">
@@ -718,9 +817,9 @@ footer p{font-family:'DM Mono',monospace;font-size:13px;color:var(--muted);}
 
 <div class="sw" id="achievements">
   <div class="sw-inner">
-    <div class="sl">Highlights</div>
-    <h2>Achievements</h2>
-    <div class="agrid">
+    <div class="sl reveal">Highlights</div>
+    <h2 class="reveal">Achievements</h2>
+    <div class="agrid reveal-children">
       <div class="acard"><div class="a-bar"></div><p>Solved <strong>200+ DSA problems</strong> across LeetCode, HackerRank, and GeeksforGeeks — 134 on LeetCode, plus HackerRank and GFG.</p></div>
       <div class="acard"><div class="a-bar"></div><p>Earned <strong>5&#9733; rating</strong> in Problem Solving on HackerRank.</p></div>
       <div class="acard"><div class="a-bar"></div><p>Earned <strong>5&#9733; rating</strong> in Programming Language on HackerRank.</p></div>
@@ -732,9 +831,9 @@ footer p{font-family:'DM Mono',monospace;font-size:13px;color:var(--muted);}
 
 <div class="sw" id="education">
   <div class="sw-inner">
-    <div class="sl">Academic Background</div>
-    <h2>Education</h2>
-    <div class="etl">
+    <div class="sl reveal">Academic Background</div>
+    <h2 class="reveal">Education</h2>
+    <div class="etl reveal-left">
       <div class="ei"><div class="eperiod">Aug 2023 &mdash; Present</div><div class="einst">Lovely Professional University</div><div class="edeg">B.Tech &mdash; Computer Science &amp; Engineering &middot; Phagwara, India</div><span class="esc">CGPA: 8.33</span></div>
       <div class="ei"><div class="eperiod">Apr 2022 &mdash; Mar 2023</div><div class="einst">Oxford Public School</div><div class="edeg">Intermediate &middot; Hisar, Haryana</div><span class="esc">86%</span></div>
       <div class="ei"><div class="eperiod">Apr 2020 &mdash; Mar 2021</div><div class="einst">Lotus International School</div><div class="edeg">Matriculation &middot; Hisar, Haryana</div><span class="esc">86%</span></div>
@@ -744,9 +843,9 @@ footer p{font-family:'DM Mono',monospace;font-size:13px;color:var(--muted);}
 
 <div class="sw" id="contact" style="border-bottom:none;">
   <div class="sw-inner">
-    <div class="sl">Get In Touch</div>
-    <h2>Let's Connect</h2>
-    <div class="contgrid">
+    <div class="sl reveal">Get In Touch</div>
+    <h2 class="reveal">Let's Connect</h2>
+    <div class="contgrid reveal-children">
       <div class="contintro"><p>Open to internships, collaborations, and interesting problems in ML, NLP, and GenAI. Feel free to reach out through any channel.</p></div>
       <div class="contlinks">
         <a href="mailto:groverrjatin233@gmail.com" class="cl"><span class="clico">@</span>groverrjatin233@gmail.com</a>
@@ -1191,6 +1290,55 @@ for(let i=0;i<90;i++)parts.push(new P());
   });
 
   // GitHub section removed
+
+})();
+
+
+/* ---- SCROLL REVEAL OBSERVER ---- */
+(function initReveal() {
+  const revealEls = document.querySelectorAll(
+    '.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-children'
+  );
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        // Don't unobserve — keep it visible once shown
+      }
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: '0px 0px -60px 0px'
+  });
+
+  revealEls.forEach(el => observer.observe(el));
+
+  /* ---- COUNTER ANIMATION for hero stats ---- */
+  function animateCounter(el, target, suffix, duration) {
+    let start = 0;
+    const step = target / (duration / 16);
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= target) {
+        el.textContent = target + suffix;
+        clearInterval(timer);
+      } else {
+        el.textContent = Math.floor(start) + suffix;
+      }
+    }, 16);
+  }
+
+  // Animate hero numbers after a short delay
+  setTimeout(() => {
+    const cgpa   = document.querySelector('.hst div:nth-child(1) .stn');
+    const dsa    = document.querySelector('.hst div:nth-child(2) .stn');
+    const certs  = document.querySelector('.hst div:nth-child(3) .stn');
+    const hr     = document.querySelector('.hst div:nth-child(4) .stn');
+    if (cgpa)  cgpa.innerHTML  = '<span class="count-num">8.33</span><span>*</span>';
+    if (dsa)   { dsa.innerHTML = '<span class="count-num">0</span><span>+</span>'; animateCounter(dsa.querySelector('.count-num'), 200, '', 1200); }
+    if (certs) { certs.innerHTML = '<span class="count-num">0</span><span>+</span>'; animateCounter(certs.querySelector('.count-num'), 7, '', 800); }
+  }, 900);
 
 })();
 
